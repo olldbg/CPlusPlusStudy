@@ -1,0 +1,11 @@
+# Get names of subdirectories in directory
+macro(subdirlist result curdir)
+  FILE(GLOB children RELATIVE ${curdir} ${curdir}/*)
+  SET(dirlist "")
+  foreach (child ${children})
+    if (IS_DIRECTORY ${curdir}/${child} AND NOT ${child} STREQUAL "CMakeFiles")
+      list(APPEND dirlist ${child})
+    endif()
+  endforeach ()
+  set(${result} ${dirlist})
+endmacro()
